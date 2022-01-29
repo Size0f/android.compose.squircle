@@ -4,8 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.github.Size0f'
-
 android {
     compileSdk 32
 
@@ -22,7 +20,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,6 +30,22 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.sizeof.libraries.compose'
+                artifactId = 'squircle'
+                version = '1.0.1'
+            }
+        }
     }
 }
 
