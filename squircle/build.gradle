@@ -45,7 +45,8 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.sizeof.libraries.compose'
                 artifactId = 'squircle'
-                version = '1.0.0'
+                version = '1.0.1'
+                artifact("$buildDir/outputs/aar/squircle-release.aar")
             }
         }
     }
