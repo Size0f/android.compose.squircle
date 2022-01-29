@@ -1,4 +1,4 @@
-# Android LightWeight Squicle Library for JetPack Compose
+# Android LightWeight Squircle Library for JetPack Compose
 
 ## Usage
 
