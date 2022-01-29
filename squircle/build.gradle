@@ -43,7 +43,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.sizeof.libraries.compose'
                 artifactId = 'squircle'
-                version = '1.0.1'
+                version = '1.0.5'
             }
         }
     }
