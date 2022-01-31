@@ -11,8 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import kotlin.math.abs
-import kotlin.math.pow
 
 @Composable
 fun Squircle(
@@ -21,18 +19,13 @@ fun Squircle(
     backgroundColor: Color = Color.Transparent,
     content: @Composable BoxScope.() -> Unit
 ) {
-    val squircleModifier = Modifier
-        .size(sizeInDp)
-        .clip(SquircleShape(smoothing))
-        .background(color = backgroundColor)
-
     Box(
-        squircleModifier,
+        Modifier
+            .size(sizeInDp)
+            .clip(SquircleShape(smoothing))
+            .background(color = backgroundColor),
         contentAlignment = Alignment.Center,
     ) {
         content()
     }
 }
-
-internal fun evalSquircleFun(x: Int, radius: Double, smoothing: Double) =
-    (radius - abs(x.toDouble().pow(smoothing))).pow(1 / smoothing).toFloat()
