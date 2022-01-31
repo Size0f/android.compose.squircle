@@ -1,7 +1,5 @@
 # Android LightWeight Squircle Library for JetPack Compose
 
-## Demo
-
 <img src="https://user-images.githubusercontent.com/8309945/151852180-f6f6acc1-fd09-46e9-8d3b-31297854eec9.gif" width="20%"/>
 
 ## Usage
