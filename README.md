@@ -1,5 +1,9 @@
 # Android LightWeight Squircle Library for JetPack Compose
 
+## Demo
+
+![squircle_demo](https://user-images.githubusercontent.com/8309945/151852180-f6f6acc1-fd09-46e9-8d3b-31297854eec9.gif)
+
 ## Usage
 
 Based on Compose Box and custom clip path
@@ -31,6 +35,6 @@ repositories {
 ``` 
 dependencies { 
   ...
-  implementation 'com.github.Size0f:android.compose.squircle:1.0.5'
+  implementation 'com.github.Size0f:android.compose.squircle:1.0.6'
 }
 ```
