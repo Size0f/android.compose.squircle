@@ -33,6 +33,6 @@ repositories {
 ``` 
 dependencies { 
   ...
-  implementation 'com.github.Size0f:android.compose.squircle:1.0.6'
+  implementation 'com.github.Size0f:android.compose.squircle:1.0.7'
 }
 ```
