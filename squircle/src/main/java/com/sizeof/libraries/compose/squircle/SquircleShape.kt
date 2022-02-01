@@ -1,14 +1,17 @@
 package com.sizeof.libraries.compose.squircle
 
-import androidx.compose.ui.geometry.Offset
+import android.graphics.Path
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.core.graphics.scaleMatrix
+import androidx.core.graphics.translationMatrix
 import kotlin.math.abs
 import kotlin.math.pow
+
 
 /***
  * Squircle Shape
@@ -27,9 +30,11 @@ internal class SquircleShape(
     )
 
     companion object {
+        private const val OVERSAMPLING_MULTIPLIER = 4F
         private fun createSquirclePath(size: Size, smoothing: Double) =
             Path().apply {
-                val squircleRadius = (size.width / 2F).toInt()
+                val oversize = size.width * OVERSAMPLING_MULTIPLIER
+                val squircleRadius = (oversize / 2F).toInt()
 
                 // power radius before for optimization
                 val poweredRadius = squircleRadius
@@ -50,23 +55,31 @@ internal class SquircleShape(
                 var currentX = 0F
                 var currentY = 0F
 
-                // set path by using quadraticBezierTo
+                // set path by using quadraticBezier
                 (yCoordinates + yMirroredCoordinates).forEach { (x, y) ->
-                    quadraticBezierTo(currentX, currentY, x, y)
+                    quadTo(currentX, currentY, x, y)
                     currentX = x
                     currentY = y
                 }
 
                 close()
 
-                // translate path to center
-                translate(
-                    Offset(
-                        x = size.width / 2,
-                        y = size.height / 2
+                // scale down to original size - for better corners without anti-alias
+                transform(
+                    scaleMatrix(
+                        sx = 1 / OVERSAMPLING_MULTIPLIER,
+                        sy = 1 / OVERSAMPLING_MULTIPLIER
                     )
                 )
-            }
+
+                // translate path to center
+                transform(
+                    translationMatrix(
+                        tx = size.width / 2,
+                        ty = size.height / 2
+                    )
+                )
+            }.asComposePath()
 
         // squircle formula: | (r^smoothing) - |x|^5 | ^ (1 / smoothing)
         private fun evalSquircleFun(x: Int, poweredRadius: Double, smoothing: Double) =
